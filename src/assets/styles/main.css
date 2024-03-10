@@ -1,0 +1,102 @@
+.ant-layout-header {
+  height: 64px;
+  padding: 0 50px;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 64px;
+  background: #c62828;
+}
+
+.ant-layout-content {
+  flex: auto;
+  min-height: auto;
+}
+
+.success {
+  border: 1px solid green;
+  color: green;
+  background-color: transparent;
+}
+
+.active {
+  border: 1px solid green;
+  color: green;
+  background-color: transparent;
+}
+
+.failed {
+  border: 1px solid red;
+  color: red;
+  background-color: transparent;
+}
+
+.pending {
+  border: 1px solid rgb(65, 134, 191);
+  color: rgb(65, 134, 191);
+  background-color: transparent;
+}
+
+.row-layout {
+  width: 100%;
+  align-items: baseline;
+}
+
+.first-col-layout {
+  width: 20%
+}
+
+.second-col-layout {
+  width: 45%
+}
+
+.text-danger {
+  color: red;
+  margin-right: 5px;
+}
+
+.fullscreen {
+  background: rgb(255, 255, 255);
+  padding: 24px;
+  margin: 0px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c62828;
+}
+
+.login-card {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-title {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.form-item-margin {
+  margin: 5px 0;
+}
+
+.khqr-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.khqr-bg::after {
+  content: "";
+  opacity: 0.3;
+  position: absolute;
+  bottom: -10px;
+  transform: rotate(7deg);
+  right: -10px;
+  width: 120px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  z-index: 1;
+  pointer-events: none;
+}
