@@ -19,8 +19,8 @@ export const baseAuthStore = defineStore('baseAuthStore', () => {
     const user: LoginRequest = {
       username: username,
       password: password,
-      client_id: 'admin',
-      client_secret: 'admin@123',
+      client_id: import.meta.env.VITE_CLIENT_ID,
+      client_secret: import.meta.env.VITE_CLEINT_SECRET,
       grant_type: 'password'
     }
     const response: LoginResponse = await baseAPI.postLogin(user, API_LOGIN)

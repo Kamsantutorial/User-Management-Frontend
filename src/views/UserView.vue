@@ -1,7 +1,13 @@
 <template>
-  <BaseComponent @on-init="onInitList" @show-form-add="showAdd" @show-form-detail="showFormDetail"
-    @on-delete="showFormDelete" @show-form-update="showUpdate" :page-title="'User'"
-    v-if="hasAccess('VIEW_USER') || hasAccess('CREATE_USER') || hasAccess('UPDATE_USER')">
+  <BaseComponent
+    @on-init="onInitList"
+    @show-form-add="showAdd"
+    @show-form-detail="showFormDetail"
+    @on-delete="showFormDelete"
+    @show-form-update="showUpdate"
+    :page-title="'User'"
+    v-if="hasAccess('VIEW_USER') || hasAccess('CREATE_USER') || hasAccess('UPDATE_USER')"
+  >
     <template #header>
       <a-row>
         <a-col :span="18">
@@ -13,8 +19,12 @@
           </a-button>
         </a-col>
         <a-col :span="6">
-          <a-input-search v-model:value="searchValue" placeholder="input search text" enter-button="Search"
-            @search="onInitList()" />
+          <a-input-search
+            v-model:value="searchValue"
+            placeholder="input search text"
+            enter-button="Search"
+            @search="onInitList()"
+          />
         </a-col>
       </a-row>
     </template>
@@ -24,8 +34,10 @@
         <a-row class="row-layout">
           <a-col class="first-col-layout"><span class="text-danger">*</span>Username</a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.username"
-              @blur="validate('username', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.username"
+              @blur="validate('username', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input placeholder="Username" v-model:value="required.username" />
             </a-form-item>
           </a-col>
@@ -68,8 +80,16 @@
           <a-col class="first-col-layout"><span class="text-danger">*</span>Roles</a-col>
           <a-col style="width: 45%">
             <a-form-item v-bind="validateInfos.roleObject">
-              <a-select ref="select" placeholder="--Select Role--"  v-model:value="required.roleObject" @change="selectChangeRole" mode="multiple">
-                <a-select-option v-for="role in roles" :value="role.id">{{ role.role_name }}</a-select-option>
+              <a-select
+                ref="select"
+                placeholder="--Select Role--"
+                v-model:value="required.roleObject"
+                @change="selectChangeRole"
+                mode="multiple"
+              >
+                <a-select-option v-for="role in roles" :key="role.id" :value="role.id">{{
+                  role.role_name
+                }}</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -88,13 +108,13 @@
           <a-col class="first-col-layout"><span class="text-danger">*</span>Confirm Password</a-col>
           <a-col class="second-col-layout">
             <a-form-item>
-              <a-input-password placeholder="input confirm password" v-model:value="item.confirm_password" />
+              <a-input-password
+                placeholder="input confirm password"
+                v-model:value="item.confirm_password"
+              />
             </a-form-item>
           </a-col>
         </a-row>
-
-
-        
       </a-row>
       <a-divider></a-divider>
       <a-row style="margin-left: 30%">
@@ -109,8 +129,10 @@
         <a-row class="row-layout">
           <a-col class="first-col-layout"><span class="text-danger">*</span>User Name</a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.username"
-              @blur="validate('username', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.username"
+              @blur="validate('username', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.username" :disabled="'true'" />
             </a-form-item>
           </a-col>
@@ -137,8 +159,15 @@
           <a-col class="first-col-layout"><span class="text-danger">*</span>Roles</a-col>
           <a-col style="width: 35%">
             <a-form-item v-bind="validateInfos.roleObject">
-              <a-select ref="select" v-model:value="required.roleObject" @change="selectChangeRole" mode="multiple">
-                <a-select-option v-for="role in roles" :value="role.id">{{ role.role_name }}</a-select-option>
+              <a-select
+                ref="select"
+                v-model:value="required.roleObject"
+                @change="selectChangeRole"
+                mode="multiple"
+              >
+                <a-select-option v-for="role in roles" :key="role.id" :value="role.id">{{
+                  role.role_name
+                }}</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -147,7 +176,11 @@
           <a-col style="width: 19.4%; margin-left: 10px">Status</a-col>
           <a-col style="width: 35%">
             <a-form-item>
-              <a-switch v-model:checked="item.is_active" checked-children="Active" un-checked-children="In-Active" />
+              <a-switch
+                v-model:checked="item.is_active"
+                checked-children="Active"
+                un-checked-children="In-Active"
+              />
             </a-form-item>
           </a-col>
         </a-row>
@@ -155,14 +188,22 @@
           <a-col style="width: 19.4%; margin-left: 10px">Locked</a-col>
           <a-col style="width: 35%">
             <a-form-item>
-              <a-switch v-model:checked="item.locked" checked-children="Locked" un-checked-children="Un-Lock" />
+              <a-switch
+                v-model:checked="item.locked"
+                checked-children="Locked"
+                un-checked-children="Un-Lock"
+              />
             </a-form-item>
           </a-col>
         </a-row>
       </a-row>
       <a-divider></a-divider>
       <a-row style="margin-left: 30%">
-        <a-col><a-button type="primary" @click.prevent="onSubmit" v-if="hasAccess('UPDATE_USER')">Save</a-button></a-col>
+        <a-col
+          ><a-button type="primary" @click.prevent="onSubmit" v-if="hasAccess('UPDATE_USER')"
+            >Save</a-button
+          ></a-col
+        >
         <a-col><a-button style="margin-left: 10px" @click="back()">Back</a-button></a-col>
       </a-row>
     </template>
@@ -175,10 +216,16 @@
         <a-descriptions-item label="Staff ID">{{ item?.staff_id }}</a-descriptions-item>
         <a-descriptions-item label="Email">{{ item?.email }}</a-descriptions-item>
         <a-descriptions-item label="Phone Number">{{ item?.phone_number }}</a-descriptions-item>
-        <a-descriptions-item label="Role"><a-badge v-for="tag in item.roles"
-            style="background-color: green; border-radius: 5px;" :count="tag?.role_name?.toUpperCase()">
-          </a-badge></a-descriptions-item>
-        <a-descriptions-item label="Branch">{{ item?.branch?.branch_name }}</a-descriptions-item>
+        <a-descriptions-item label="Role"
+          ><a-badge
+            v-for="tag in item.roles"
+            :key="tag.id"
+            style="background-color: green; border-radius: 5px"
+            :count="tag?.role_name?.toUpperCase()"
+          >
+          </a-badge
+        ></a-descriptions-item>
+        <!-- <a-descriptions-item label="Branch">{{ item?.branch?.branch_name }}</a-descriptions-item> -->
         <a-descriptions-item label="Create Date">{{ item?.created_at }}</a-descriptions-item>
         <a-descriptions-item label="Locked">{{ item?.locked }}</a-descriptions-item>
         <a-descriptions-item label="Status">
@@ -217,31 +264,38 @@ import type { BranchModel } from '@/components/setting/branch/BranchModel'
 import { BranchStore } from '@/components/setting/branch/store/BranchStore'
 import { RoleStore } from '@/components/setting/role/store/RoleStore'
 import type { RoleModel } from '@/components/setting/role/RoleModel'
-import { API_CREATE_USER, API_LIST_USER, API_UPDATE_USER, API_LIST_ALL_BRANCH, API_LIST_ALL_ROLES, API_DELETE_USER } from '@/components/base/constants/APIEndpoint'
+import {
+  API_CREATE_USER,
+  API_LIST_USER,
+  API_UPDATE_USER,
+  API_LIST_ALL_BRANCH,
+  API_LIST_ALL_ROLES,
+  API_DELETE_USER
+} from '@/components/base/constants/APIEndpoint'
 import { accessRightStore } from '@/components/base/stores/BaseAccessRightStore'
 import LoadingView from '@/components/base/components/loading/LoadingView.vue'
 
 const state = reactive({
-  loading: false,
-});
+  loading: false
+})
 
-const showDialog = ref(false);
-let currentId: any = null;
+const showDialog = ref(false)
+let currentId: any = null
 
 const showFormDelete = (id: any) => {
-  currentId = id;
-  showDialog.value = true;
+  currentId = id
+  showDialog.value = true
 }
 
 const handleOk = () => {
   onDelete(currentId, API_DELETE_USER).then((response) => {
     if (response.code == '200') {
-      showDialog.value = false;
-      alert("success", "Success", "User has been deleted succesfully.")
-      onInitList();
+      showDialog.value = false
+      alert('success', 'Success', 'User has been deleted succesfully.')
+      onInitList()
     }
   })
-};
+}
 
 /**
  * Stores
@@ -250,9 +304,7 @@ const { hasAccess } = accessRightStore()
 
 const branchStore = BranchStore()
 
-const {
-  listAllBranches
-} = branchStore
+const { listAllBranches } = branchStore
 
 // declare
 const branches = ref<BranchModel[]>([])
@@ -268,9 +320,7 @@ listAllBranches(API_LIST_ALL_BRANCH).then((response) => {
 // role
 const roleStore = RoleStore()
 
-const {
-  listAllRoles
-} = roleStore
+const { listAllRoles } = roleStore
 
 // declare role
 const roles = ref<RoleModel[]>([])
@@ -279,17 +329,17 @@ listAllRoles(API_LIST_ALL_ROLES).then((response) => {
   roles.value = response.body
 })
 
-const selectChangeBranch = (value: number) => {
-  item.value.branch_id = value
-};
+// const selectChangeBranch = (value: number) => {
+//   item.value.branch_id = value
+// }
 
 const selectChangeRole = (values: string[]) => {
   item.value.roles = []
   values.forEach((id: string) => {
-    let role = roles.value.find(role => role.id === id);
-    item.value.roles.push(role);
+    let role = roles.value.find((role) => role.id === id)
+    item.value.roles.push(role)
   })
-};
+}
 
 //base store
 const baseStore = shareBaseStore()
@@ -332,29 +382,29 @@ page.value = 1
 size.value = 10
 
 const back = () => {
-  branchObject.value = ''
+  //branchObject.value = ''
   onInitList()
   showListing()
 }
 
 const showUpdate = (object: UserModel) => {
-  branchObject.value = ''
-  if (object.branch != null) {
-    branchObject = ref({
-      value: object.branch.id,
-      label: object.branch.branch_name
-    })
-  }
+  //branchObject.value = ''
+  // if (object.branch != null) {
+  //   branchObject = ref({
+  //     value: object.branch.id,
+  //     label: object.branch.branch_name
+  //   })
+  // }
 
   item.value = object
-  item.value.branch_id = object.branch.id
+  // item.value.branch_id = object.branch.id
 
   roleObject.value = []
   required.roleObject = []
   if (object.roles != null) {
     object.roles.forEach((element: any) => {
-      required.roleObject.push(element?.id);
-    });
+      required.roleObject.push(element?.id)
+    })
   }
 
   required.id = object.id
@@ -429,11 +479,11 @@ tableColumns.value = [
 
 tableActions.value = ['view']
 
-if (hasAccess("UPDATE_USER")) {
-  tableActions.value.push("edit")
+if (hasAccess('UPDATE_USER')) {
+  tableActions.value.push('edit')
 }
-if (hasAccess("DELETE_USER")) {
-  tableActions.value.push("delete")
+if (hasAccess('DELETE_USER')) {
+  tableActions.value.push('delete')
 }
 
 const onInitList = () => {
@@ -447,7 +497,7 @@ const onInitList = () => {
   clearSearch()
 }
 
-onInitList();
+onInitList()
 
 let required = reactive({
   username: '',
@@ -456,40 +506,40 @@ let required = reactive({
   roleObject: ref<any[]>([]),
   password: '',
   confirm_password: '',
-  id: '',
-});
+  id: ''
+})
 
 const rulesRef = reactive({
   username: [
     {
       required: true,
-      message: 'Please input User Name',
+      message: 'Please input User Name'
     },
     {
       max: 100,
       message: 'Length less then 100',
-      trigger: 'blur',
-    },
+      trigger: 'blur'
+    }
   ],
   branchObject: [
     {
       required: true,
-      message: 'Please select Branch',
+      message: 'Please select Branch'
     }
   ],
   roleObject: [
     {
       required: true,
-      message: 'Please select Role',
+      message: 'Please select Role'
     }
   ]
-});
+})
 
 const { validate, validateInfos } = useForm(required, rulesRef)
 
 const onSubmit = () => {
   // Show the loading message
-  state.loading = true;
+  state.loading = true
   validate()
     .then((res: any) => {
       console.log(res, item.value)
@@ -501,8 +551,8 @@ const onSubmit = () => {
           email: item.value.email,
           phone_number: item.value.phone_number,
           role_name: item.value.role_name,
-          roles: item.value.roles.map((item: any) => new Number(item.id)),
-          branch_id: item.value.branch_id,
+          role_ids: item.value.roles.map((item: any) => new Number(item.id)),
+          //branch_id: item.value.branch_id,
           id: item.value.id,
           is_active: item.value.is_active,
           locked: item.value.locked
@@ -512,23 +562,23 @@ const onSubmit = () => {
             console.log('Create Sumitted .....', response)
             if (response.code == '200') {
               setTimeout(() => {
-                state.loading = false;
-              }, 100);
-              alert("success", "Success", "User has been created succesfully.")
-              showListing();
+                state.loading = false
+              }, 100)
+              alert('success', 'Success', 'User has been created succesfully.')
+              showListing()
             } else if (response.code == '500') {
-              state.loading = false;
-              alert("error", "Error", "User not found.")
+              state.loading = false
+              alert('error', 'Error', 'User not found.')
             } else if (response.code == '204') {
-              state.loading = false;
-              alert("error", "Error", "Role not found.")
+              state.loading = false
+              alert('error', 'Error', 'Role not found.')
             }
-            onInitList();
+            onInitList()
           })
           .catch((error) => {
-            state.loading = false;
+            state.loading = false
             stopLoading()
-            alert("error", "Error", error)
+            alert('error', 'Error', error)
           })
       } else if (isShowFormUpdate.value) {
         const reqUpdate = reactive({
@@ -538,8 +588,8 @@ const onSubmit = () => {
           email: item.value.email,
           phone_number: item.value.phone_number,
           role_name: item.value.role_name,
-          roles: item.value.roles.map((item: any) => new Number(item.id)),
-          branch_id: item.value.branch_id,
+          role_ids: item.value.roles.map((item: any) => new Number(item.id)),
+         // branch_id: item.value.branch_id,
           id: item.value.id,
           is_active: item.value.is_active,
           locked: item.value.locked
@@ -549,26 +599,26 @@ const onSubmit = () => {
             console.log('Update Sumitted .....', response)
             if (response.code == '200') {
               setTimeout(() => {
-                state.loading = false;
-              }, 100);
-              alert("success", "Success", "User has been updated succesfully.")
-              showListing();
+                state.loading = false
+              }, 100)
+              alert('success', 'Success', 'User has been updated succesfully.')
+              showListing()
             } else if (response.code == '500') {
-              state.loading = false;
-              alert("error", "Error", "User not found.")
+              state.loading = false
+              alert('error', 'Error', 'User not found.')
             }
-            onInitList();
+            onInitList()
           })
           .catch((error) => {
             stopLoading()
-            state.loading = false;
-            alert("error", "Error", error)
+            state.loading = false
+            alert('error', 'Error', error)
           })
       }
     })
     .catch((err: any) => {
       console.log('error', err)
-      state.loading = false;
+      state.loading = false
     })
 }
 </script>

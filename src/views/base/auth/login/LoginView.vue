@@ -2,7 +2,7 @@
   <div class="fullscreen">
     <a-card :title="null" class="login-card khqr-bg">
       <a-space>
-        <img src="@/assets/images/aeon-logo.png" width="40" alt="AEON" />
+        <img src="@/assets/images/kamsan-tutorial-logo-circle.png" width="40" alt="AEON" />
         <h2 class="login-title">{{ appTitle }}</h2>
       </a-space>
       <a-form :model="formState" name="basic" :label-col="{ span: 24 }" :wrapper-col="{ span: 24 }" autocomplete="off"

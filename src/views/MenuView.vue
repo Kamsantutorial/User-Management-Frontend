@@ -57,7 +57,7 @@
           <a-col class="second-col-layout">
             <a-form-item v-bind="validateInfos.order_by"
               @blur="validate('order_by', { trigger: 'blur' }).catch(() => { })">
-              <a-input v-model:value="required.order_by" />
+              <a-input-number v-model:value="required.order_by" />
             </a-form-item>
           </a-col>
         </a-row>
@@ -78,7 +78,7 @@
           <a-col class="first-col-layout">
             <label style="margin-left: 10px">Parent</label>
           </a-col>
-          <a-col style="width: 35%">
+          <a-col style="width: 45%">
             <a-form-item>
               <a-select ref="select" v-model:value="parentObject" @change="selectChange">
                 <a-select-option v-for="par in parent" :value="par.id">{{ par.menu_name }}</a-select-option>
@@ -134,7 +134,7 @@
           <a-col class="second-col-layout">
             <a-form-item v-bind="validateInfos.order_by"
               @blur="validate('order_by', { trigger: 'blur' }).catch(() => { })">
-              <a-input v-model:value="required.order_by" />
+              <a-input-number v-model:value="required.order_by" />
             </a-form-item>
           </a-col>
         </a-row>
@@ -155,7 +155,7 @@
           <a-col class="first-col-layout">
             <label style="margin-left: 10px">Parent</label>
           </a-col>
-          <a-col style="width: 35%">
+          <a-col style="width: 45%">
             <a-form-item>
               <a-select ref="select" v-model:value="parentObject" @change="selectChange">
                 <a-select-option v-for="par in parent" :value="par.id">{{ par.menu_name }}</a-select-option>
@@ -225,7 +225,7 @@ const {
 } = menuStore
 
 listParent(API_LIST_PARENTS).then((response) => {
-  parent.value = response.data
+  parent.value = response.body
 })
 
 const selectChange = (value: number) => {
@@ -398,11 +398,11 @@ const rulesRef = reactive({
       required: true,
       message: 'Please input Order',
     },
-    {
-      max: 20,
-      message: 'Length less then 20',
-      trigger: 'blur',
-    },
+    // {
+    //   max: 20,
+    //   message: 'Length less then 20',
+    //   trigger: 'blur',
+    // },
   ],
   icon: [
     {
@@ -449,12 +449,12 @@ const onSubmit = () => {
           })
       } else if (isShowFormUpdate.value) {
         const reqUpdate = reactive({
-          menu_name: item.value.menu_name,
-          url: item.value.url,
-          order_by: item.value.order_by,
-          icon: item.value.icon,
-          parent_id: item.value.parent_id,
           id: item.value.id,
+          menu_name: required.menu_name,
+          url: required.url,
+          order_by: required.order_by,
+          icon: required.icon,
+          parent_id: item.value.parent_id
         })
         onUpdate(reqUpdate, reqUpdate?.id, API_UPDATE_MENU)
           .then((response) => {

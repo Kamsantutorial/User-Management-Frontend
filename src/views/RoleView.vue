@@ -30,7 +30,7 @@
           </a-col>
         </a-row>
         <a-col>
-          <a-checkbox-group v-model:value="permissionObject" @change="" style="width: 100%">
+          <a-checkbox-group v-model:value="permissionObject" style="width: 100%">
             <div v-for="menu in menus" :key="menu.id">
               <a-row>
                 <a-col :span="24">
@@ -40,7 +40,7 @@
               <a-row>
                 <a-col :span="24" style="margin-bottom: 10px;margin-top: 10px;">
                   <a-row>
-                    <a-col style="margin-bottom: 10px;margin-top: 10px;" v-for="permission in menu.permissions" :span="8">
+                    <a-col style="margin-bottom: 10px;margin-top: 10px;" v-for="permission in menu.permissions" :key="permission.id" :span="8">
                       <a-checkbox :key="permission.id" :value="permission.id">
                         {{ permission.permission_name }}
                       </a-checkbox>
@@ -72,7 +72,7 @@
           </a-col>
         </a-row>
         <a-col>
-          <a-checkbox-group v-model:value="permissionObject" @change="" style="width: 100%">
+          <a-checkbox-group v-model:value="permissionObject" style="width: 100%">
             <div v-for="menu in menus" :key="menu.id">
               <a-row>
                 <a-col :span="24">
@@ -82,7 +82,7 @@
               <a-row>
                 <a-col :span="24" style="margin-bottom: 10px;margin-top: 10px;">
                   <a-row>
-                    <a-col style="margin-bottom: 10px;margin-top: 10px;" v-for="permission in menu.permissions" :span="8">
+                    <a-col style="margin-bottom: 10px;margin-top: 10px;" v-for="permission in menu.permissions" :key="permission.id" :span="8">
                       <a-checkbox :key="permission.id" :value="permission.id">
                         {{ permission.permission_name }}
                       </a-checkbox>
@@ -271,7 +271,7 @@ const onSubmit = () => {
       console.log(res, item.value)
       const req = reactive({
         role_name: required.role_name,
-        permissions: permissionObject.value,
+        permission_ids: permissionObject.value,
         id: item.value.id,
         status: item.value.status
       })
