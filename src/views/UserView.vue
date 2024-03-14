@@ -66,16 +66,6 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <!-- <a-row class="row-layout">
-          <a-col class="first-col-layout"><span class="text-danger">*</span>Branch</a-col>
-          <a-col style="width: 35%">
-            <a-form-item v-bind="validateInfos.branchObject">
-              <a-select ref="select" v-model:value="required.branchObject" @change="selectChangeBranch">
-                <a-select-option v-for="branch in branches" :value="branch.id">{{ branch.branch_name }}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col><span class="text-danger">*</span>
-        </a-row> -->
         <a-row class="row-layout">
           <a-col class="first-col-layout"><span class="text-danger">*</span>Roles</a-col>
           <a-col style="width: 45%">
@@ -145,16 +135,6 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <!-- <a-row class="row-layout">
-          <a-col class="first-col-layout"><span class="text-danger">*</span>Branch</a-col>
-          <a-col style="width: 35%">
-            <a-form-item v-bind="validateInfos.branchObject">
-              <a-select ref="select" v-model:value="required.branchObject" @change="selectChangeBranch">
-                <a-select-option v-for="branch in branches" :value="branch.id">{{ branch.branch_name }}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-        </a-row> -->
         <a-row class="row-layout">
           <a-col class="first-col-layout"><span class="text-danger">*</span>Roles</a-col>
           <a-col style="width: 35%">
@@ -589,7 +569,7 @@ const onSubmit = () => {
           phone_number: item.value.phone_number,
           role_name: item.value.role_name,
           role_ids: item.value.roles.map((item: any) => new Number(item.id)),
-         // branch_id: item.value.branch_id,
+          // branch_id: item.value.branch_id,
           id: item.value.id,
           is_active: item.value.is_active,
           locked: item.value.locked

@@ -9,9 +9,15 @@
       <a-row>
         <a-col :span="24">
           <div class="dashboard__cards">
-            <DashboardCard title="Total User" route="/user" :count="totalUser" label="Completed" description="Users" :icon="CheckOutlined"
-              :type="'primary'" />
-            
+            <DashboardCard
+              title="Total User"
+              route="/user"
+              :count="totalUser"
+              label="Completed"
+              description="Users"
+              :icon="CheckOutlined"
+              :type="'primary'"
+            />
           </div>
         </a-col>
       </a-row>
@@ -23,24 +29,24 @@
 import DashboardCard from '@/views/home/DashboardCard.vue'
 import { CheckOutlined, IssuesCloseOutlined } from '@ant-design/icons-vue'
 import { reactive, ref } from 'vue'
-import dayjs, { Dayjs } from 'dayjs';
-import { shareBaseStore } from '@/components/base/stores/BaseComponentStore';
-
+import dayjs, { Dayjs } from 'dayjs'
+import { shareBaseStore } from '@/components/base/stores/BaseComponentStore'
+import { API_COUNT_USER } from '@/components/base/constants/APIEndpoint'
 
 const totalUser = ref(0)
-const dateFormat = 'YYYY/MM/DD';
+const dateFormat = 'YYYY/MM/DD'
 
-const currentDate = dayjs();
-const defaultStartDate = currentDate.startOf('month');
-const defaultEndDate = currentDate.endOf('month');
+const currentDate = dayjs()
+const defaultStartDate = currentDate.startOf('month')
+const defaultEndDate = currentDate.endOf('month')
 
-const formattedStartDate = defaultStartDate.format(dateFormat);
-const formattedEndDate = defaultEndDate.format(dateFormat);
+const formattedStartDate = defaultStartDate.format(dateFormat)
+const formattedEndDate = defaultEndDate.format(dateFormat)
 
 const dataRange = ref<[Dayjs, Dayjs]>([
   dayjs(formattedStartDate, dateFormat),
   dayjs(formattedEndDate, dateFormat)
-]);
+])
 
 const baseStore = shareBaseStore()
 
@@ -60,35 +66,14 @@ const {
   onInit
 } = baseStore
 
-let req = reactive({
-  from: dataRange.value?.[0]?.format("YYYY-MM-DD"),// dataRange.value?.[0].format("YYYY-MM-DDT17:00:00.000Z"),
-  to: dataRange.value?.[1]?.format("YYYY-MM-DD") // dataRange.value?.[1].format("YYYY-MM-DDT17:00:00.000Z")
-})
-
 function getDashboardData() {
-  console.log("dataRange.value", dataRange.value)
-  if (dataRange.value){
-    console.log("dataRange.value if", dataRange.value)
-    //dataRange.value?.[0].format("YYYY-MM-ddT17:00:00.000Z")
-    req = reactive({
-      from:  dataRange.value?.[0]?.format("YYYY-MM-DD"), // dataRange.value?.[0].format("YYYY-MM-DDT17:00:00.000Z"),
-      to: dataRange.value?.[1]?.format("YYYY-MM-DD") // dataRange.value?.[1].format("YYYY-MM-DDT17:00:00.000Z")
-    })
-  } else {
-    console.log("dataRange.value else", dataRange.value)
-    req = reactive({
-      from: '',
-      to: ''
-    })
-  }
-}
-
-function onSelect() {
-  getDashboardData()
+  console.log('dataRange.value', dataRange.value)
+  onListing(null, API_COUNT_USER).then((res) => {
+    totalUser.value = res.body.total_user
+  })
 }
 
 getDashboardData()
-
 </script>
 
 <style lang="css" scoped>
@@ -105,8 +90,8 @@ getDashboardData()
 }
 
 .bg::after {
-  content: "";
-  background: url("@/assets/images/KHQR Logo red.png") no-repeat;
+  content: '';
+  background: url('@/assets/images/KHQR Logo red.png') no-repeat;
   opacity: 0.1;
   position: absolute;
   bottom: -10px;

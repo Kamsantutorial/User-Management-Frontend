@@ -1,6 +1,11 @@
 <template>
-  <BaseComponent @on-init="onInitList()" @show-form-detail="showFormDetail" @show-form-update="showUpdate"
-    :page-title="'Menu'" v-if="hasAccess('VIEW_MENU') || hasAccess('CREATE_MENU') || hasAccess('UPDATE_MENU')">
+  <BaseComponent
+    @on-init="onInitList()"
+    @show-form-detail="showFormDetail"
+    @show-form-update="showUpdate"
+    :page-title="'Menu'"
+    v-if="hasAccess('VIEW_MENU') || hasAccess('CREATE_MENU') || hasAccess('UPDATE_MENU')"
+  >
     <template #header>
       <a-row>
         <a-col :span="18">
@@ -12,8 +17,12 @@
           </a-button>
         </a-col>
         <a-col :span="6">
-          <a-input-search v-model:value="searchValue" placeholder="input search text" enter-button="Search"
-            @search="onInitList()" />
+          <a-input-search
+            v-model:value="searchValue"
+            placeholder="input search text"
+            enter-button="Search"
+            @search="onInitList()"
+          />
         </a-col>
       </a-row>
     </template>
@@ -28,8 +37,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.menu_name"
-              @blur="validate('menu_name', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.menu_name"
+              @blur="validate('menu_name', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.menu_name" />
             </a-form-item>
           </a-col>
@@ -42,7 +53,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.url" @blur="validate('url', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.url"
+              @blur="validate('url', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.url" />
             </a-form-item>
           </a-col>
@@ -55,8 +69,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.order_by"
-              @blur="validate('order_by', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.order_by"
+              @blur="validate('order_by', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input-number v-model:value="required.order_by" />
             </a-form-item>
           </a-col>
@@ -69,7 +85,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.icon" @blur="validate('icon', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.icon"
+              @blur="validate('icon', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.icon" />
             </a-form-item>
           </a-col>
@@ -81,7 +100,9 @@
           <a-col style="width: 45%">
             <a-form-item>
               <a-select ref="select" v-model:value="parentObject" @change="selectChange">
-                <a-select-option v-for="par in parent" :value="par.id">{{ par.menu_name }}</a-select-option>
+                <a-select-option v-for="par in parent" :key="par.id" :value="par.id">{{
+                  par.menu_name
+                }}</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -105,8 +126,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.menu_name"
-              @blur="validate('menu_name', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.menu_name"
+              @blur="validate('menu_name', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.menu_name" />
             </a-form-item>
           </a-col>
@@ -119,7 +142,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.url" @blur="validate('url', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.url"
+              @blur="validate('url', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.url" />
             </a-form-item>
           </a-col>
@@ -132,8 +158,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.order_by"
-              @blur="validate('order_by', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.order_by"
+              @blur="validate('order_by', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input-number v-model:value="required.order_by" />
             </a-form-item>
           </a-col>
@@ -146,7 +174,10 @@
             </div>
           </a-col>
           <a-col class="second-col-layout">
-            <a-form-item v-bind="validateInfos.icon" @blur="validate('icon', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.icon"
+              @blur="validate('icon', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.icon" />
             </a-form-item>
           </a-col>
@@ -158,7 +189,9 @@
           <a-col style="width: 45%">
             <a-form-item>
               <a-select ref="select" v-model:value="parentObject" @change="selectChange">
-                <a-select-option v-for="par in parent" :value="par.id">{{ par.menu_name }}</a-select-option>
+                <a-select-option v-for="par in parent" :key="par.id" :value="par.id">{{
+                  par.menu_name
+                }}</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -166,7 +199,11 @@
       </a-row>
       <a-divider></a-divider>
       <a-row style="margin-left: 30%">
-        <a-col><a-button type="primary" @click.prevent="onSubmit" v-if="hasAccess('UPDATE_MENU')">Save</a-button></a-col>
+        <a-col
+          ><a-button type="primary" @click.prevent="onSubmit" v-if="hasAccess('UPDATE_MENU')"
+            >Save</a-button
+          ></a-col
+        >
         <a-col><a-button style="margin-left: 10px" @click="back()">Back</a-button></a-col>
       </a-row>
     </template>
@@ -194,14 +231,19 @@
   </BaseComponent>
 </template>
 
-<script setup lang = "ts" >
+<script setup lang="ts">
 import { onUnmounted, reactive, ref } from 'vue'
 import { useForm } from 'ant-design-vue/lib/form'
 import BaseComponent from '../components/base/BaseComponent.vue'
 import { shareBaseStore } from '@/components/base/stores/BaseComponentStore'
 import { storeToRefs } from 'pinia'
 import type { MenuFilter, MenuModel } from '@/components/setting/menu/MenuModel'
-import { API_CREATE_MENU, API_LIST_MENU, API_UPDATE_MENU, API_LIST_PARENTS } from '@/components/base/constants/APIEndpoint'
+import {
+  API_CREATE_MENU,
+  API_LIST_MENU,
+  API_UPDATE_MENU,
+  API_LIST_PARENTS
+} from '@/components/base/constants/APIEndpoint'
 import { MenuStore } from '@/components/setting/menu/store/MenuStore'
 import { accessRightStore } from '@/components/base/stores/BaseAccessRightStore'
 
@@ -220,18 +262,16 @@ const menuStore = MenuStore()
 //base store
 const baseStore = shareBaseStore()
 
-const {
-  listParent
-} = menuStore
+const { listParent } = menuStore
 
 listParent(API_LIST_PARENTS).then((response) => {
   parent.value = response.body
 })
 
 const selectChange = (value: number) => {
-  console.log(`selected ${value}`);
+  console.log(`selected ${value}`)
   item.value.parent_id = value
-};
+}
 
 const {
   stopLoading,
@@ -297,7 +337,7 @@ tableColumns.value = [
   },
   {
     title: 'Parent',
-    dataIndex: ['parent', 'menu_name'],
+    dataIndex: ['parent', 'menu_name']
   },
   {
     title: 'Order',
@@ -322,8 +362,8 @@ tableColumns.value = [
 ]
 
 tableActions.value = ['view']
-if (hasAccess("UPDATE_MENU")) {
-  tableActions.value.push("edit")
+if (hasAccess('UPDATE_MENU')) {
+  tableActions.value.push('edit')
 }
 
 const onInitList = () => {
@@ -337,7 +377,7 @@ const onInitList = () => {
   clearSearch()
 }
 
-onInitList();
+onInitList()
 
 const showUpdate = (object: MenuModel) => {
   required.id = object.id
@@ -367,37 +407,37 @@ let required = reactive({
   url: '',
   order_by: '',
   icon: '',
-  id: '',
-});
+  id: ''
+})
 
 const rulesRef = reactive({
   menu_name: [
     {
       required: true,
-      message: 'Please input Menu Name',
+      message: 'Please input Menu Name'
     },
     {
       max: 100,
       message: 'Length less then 100',
-      trigger: 'blur',
-    },
+      trigger: 'blur'
+    }
   ],
   url: [
     {
       required: true,
-      message: 'Please input Url',
+      message: 'Please input Url'
     },
     {
       max: 255,
       message: 'Length less then 255',
-      trigger: 'blur',
-    },
+      trigger: 'blur'
+    }
   ],
   order_by: [
     {
       required: true,
-      message: 'Please input Order',
-    },
+      message: 'Please input Order'
+    }
     // {
     //   max: 20,
     //   message: 'Length less then 20',
@@ -407,15 +447,15 @@ const rulesRef = reactive({
   icon: [
     {
       required: true,
-      message: 'Please input Icon',
+      message: 'Please input Icon'
     },
     {
       max: 255,
       message: 'Length less then 255',
-      trigger: 'blur',
-    },
+      trigger: 'blur'
+    }
   ]
-});
+})
 
 const { validate, validateInfos } = useForm(required, rulesRef)
 
@@ -436,16 +476,16 @@ const onSubmit = () => {
           .then((response) => {
             console.log('Create Sumitted .....', response)
             if (response.code == '200') {
-              alert("success", "Success", "Menu has been created succesfully.")
-              showListing();
+              alert('success', 'Success', 'Menu has been created succesfully.')
+              showListing()
             } else if (response.code == '409') {
-              alert("error", "Error", "Menu is existed or Menu url is duplicated to other menus")
+              alert('error', 'Error', 'Menu is existed or Menu url is duplicated to other menus')
             }
-            onInitList();
+            onInitList()
           })
           .catch((error) => {
             stopLoading()
-            alert("error", "Error", error)
+            alert('error', 'Error', error)
           })
       } else if (isShowFormUpdate.value) {
         const reqUpdate = reactive({
@@ -460,16 +500,16 @@ const onSubmit = () => {
           .then((response) => {
             console.log('Update Sumitted .....', response)
             if (response.code == '200') {
-              alert("success", "Success", "Menu has been updated succesfully.")
-              showListing();
+              alert('success', 'Success', 'Menu has been updated succesfully.')
+              showListing()
             } else if (response.code == '409') {
-              alert("error", "Error", "Menu is existed or Menu url is duplicated to other menus.")
+              alert('error', 'Error', 'Menu is existed or Menu url is duplicated to other menus.')
             }
-            onInitList();
+            onInitList()
           })
           .catch((error) => {
             stopLoading()
-            alert("error", "Error", error)
+            alert('error', 'Error', error)
           })
       }
     })

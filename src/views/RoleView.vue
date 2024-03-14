@@ -1,6 +1,11 @@
 <template>
-  <BaseComponent @on-init="onInitList()" @show-form-detail="showFormDetail" @show-form-add="showFormAdd"
-    @show-form-update="showUpdate" v-if="hasAccess('VIEW_ROLE') || hasAccess('CREATE_ROLE') || hasAccess('UPDATE_ROLE')">
+  <BaseComponent
+    @on-init="onInitList()"
+    @show-form-detail="showFormDetail"
+    @show-form-add="showFormAdd"
+    @show-form-update="showUpdate"
+    v-if="hasAccess('VIEW_ROLE') || hasAccess('CREATE_ROLE') || hasAccess('UPDATE_ROLE')"
+  >
     <template #header>
       <a-row>
         <a-col :span="18">
@@ -12,8 +17,12 @@
           </a-button>
         </a-col>
         <a-col :span="6">
-          <a-input-search v-model:value="searchValue" placeholder="input search text" enter-button="Search"
-            @search="onInitList()" />
+          <a-input-search
+            v-model:value="searchValue"
+            placeholder="input search text"
+            enter-button="Search"
+            @search="onInitList()"
+          />
         </a-col>
       </a-row>
     </template>
@@ -23,8 +32,10 @@
         <a-row class="row-layout">
           <a-col class="first-col-layout"><span class="text-danger">*</span>Role Name</a-col>
           <a-col style="width: 50%">
-            <a-form-item v-bind="validateInfos.role_name"
-              @blur="validate('role_name', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.role_name"
+              @blur="validate('role_name', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.role_name" />
             </a-form-item>
           </a-col>
@@ -38,9 +49,14 @@
                 </a-col>
               </a-row>
               <a-row>
-                <a-col :span="24" style="margin-bottom: 10px;margin-top: 10px;">
+                <a-col :span="24" style="margin-bottom: 10px; margin-top: 10px">
                   <a-row>
-                    <a-col style="margin-bottom: 10px;margin-top: 10px;" v-for="permission in menu.permissions" :key="permission.id" :span="8">
+                    <a-col
+                      style="margin-bottom: 10px; margin-top: 10px"
+                      v-for="permission in menu.permissions"
+                      :key="permission.id"
+                      :span="8"
+                    >
                       <a-checkbox :key="permission.id" :value="permission.id">
                         {{ permission.permission_name }}
                       </a-checkbox>
@@ -65,8 +81,10 @@
         <a-row class="row-layout">
           <a-col class="first-col-layout"><span class="text-danger">*</span>Role Name</a-col>
           <a-col style="width: 50%">
-            <a-form-item v-bind="validateInfos.role_name"
-              @blur="validate('role_name', { trigger: 'blur' }).catch(() => { })">
+            <a-form-item
+              v-bind="validateInfos.role_name"
+              @blur="validate('role_name', { trigger: 'blur' }).catch(() => {})"
+            >
               <a-input v-model:value="required.role_name" />
             </a-form-item>
           </a-col>
@@ -80,9 +98,14 @@
                 </a-col>
               </a-row>
               <a-row>
-                <a-col :span="24" style="margin-bottom: 10px;margin-top: 10px;">
+                <a-col :span="24" style="margin-bottom: 10px; margin-top: 10px">
                   <a-row>
-                    <a-col style="margin-bottom: 10px;margin-top: 10px;" v-for="permission in menu.permissions" :key="permission.id" :span="8">
+                    <a-col
+                      style="margin-bottom: 10px; margin-top: 10px"
+                      v-for="permission in menu.permissions"
+                      :key="permission.id"
+                      :span="8"
+                    >
                       <a-checkbox :key="permission.id" :value="permission.id">
                         {{ permission.permission_name }}
                       </a-checkbox>
@@ -96,7 +119,11 @@
       </a-row>
       <a-divider></a-divider>
       <a-row style="margin-left: 30%">
-        <a-col><a-button type="primary" @click.prevent="onSubmit" v-if="hasAccess('UPDATE_ROLE')">Save</a-button></a-col>
+        <a-col
+          ><a-button type="primary" @click.prevent="onSubmit" v-if="hasAccess('UPDATE_ROLE')"
+            >Save</a-button
+          ></a-col
+        >
         <a-col><a-button style="margin-left: 10px" @click="back()">Back</a-button></a-col>
       </a-row>
     </template>
@@ -109,7 +136,8 @@
           <a-tag v-if="item?.is_active == 1" class="success">ACTIVE</a-tag>
           <a-tag v-else-if="item?.is_active == 0" class="pending">INACTIVE</a-tag>
           <a-tag v-else class="success">ACTIVE</a-tag>
-        </a-descriptions-item> </a-descriptions>
+        </a-descriptions-item>
+      </a-descriptions>
       <a-divider></a-divider>
 
       <a-space>
@@ -126,9 +154,14 @@ import BaseComponent from '../components/base/BaseComponent.vue'
 import { shareBaseStore } from '@/components/base/stores/BaseComponentStore'
 import { storeToRefs } from 'pinia'
 import type { RoleFilter } from '@/components/setting/role/RoleModel'
-import { API_CREATE_ROLE, API_LIST_ROLE, API_UPDATE_ROLE, API_LIST_MENU_TYPES } from '@/components/base/constants/APIEndpoint'
-import { MenuStore } from '@/components/setting/menu/store/MenuStore';
-import { type RoleModel } from '@/components/setting/role/RoleModel';
+import {
+  API_CREATE_ROLE,
+  API_LIST_ROLE,
+  API_UPDATE_ROLE,
+  API_LIST_MENU_TYPES
+} from '@/components/base/constants/APIEndpoint'
+import { MenuStore } from '@/components/setting/menu/store/MenuStore'
+import { type RoleModel } from '@/components/setting/role/RoleModel'
 import { accessRightStore } from '@/components/base/stores/BaseAccessRightStore'
 
 /**
@@ -143,7 +176,7 @@ const menus = ref<any[]>([])
 
 listAllMenuTypes(API_LIST_MENU_TYPES).then((response) => {
   menus.value = response.body
-});
+})
 
 let permissionObject = ref<any[]>([])
 
@@ -197,8 +230,8 @@ const showUpdate = (object: RoleModel) => {
   permissionObject.value = []
   if (object.permissions != null) {
     object.permissions.forEach((element: any) => {
-      permissionObject.value.push(element.id);
-    });
+      permissionObject.value.push(element.id)
+    })
   }
   showFormUpdate(object)
 }
@@ -226,8 +259,8 @@ tableColumns.value = [
 ]
 
 tableActions.value = ['view']
-if (hasAccess("UPDATE_ROLE")) {
-  tableActions.value.push("edit")
+if (hasAccess('UPDATE_ROLE')) {
+  tableActions.value.push('edit')
 }
 
 const onInitList = () => {
@@ -241,26 +274,26 @@ const onInitList = () => {
   clearSearch()
 }
 
-onInitList();
+onInitList()
 
 let required = reactive({
   role_name: '',
-  id: '',
-});
+  id: ''
+})
 
 const rulesRef = reactive({
   role_name: [
     {
       required: true,
-      message: 'Please input Role Name',
+      message: 'Please input Role Name'
     },
     {
       max: 100,
       message: 'Length less then 100',
-      trigger: 'blur',
-    },
+      trigger: 'blur'
+    }
   ]
-});
+})
 
 const { validate, validateInfos } = useForm(required, rulesRef)
 
@@ -279,13 +312,13 @@ const onSubmit = () => {
         onCreate(req, API_CREATE_ROLE)
           .then((response) => {
             console.log('Create Sumitted .....', response)
-            alert("success", "Success", "Role has been created succesfully.")
-            showListing();
-            onInitList();
+            alert('success', 'Success', 'Role has been created succesfully.')
+            showListing()
+            onInitList()
           })
           .catch((error) => {
             stopLoading()
-            alert("error", "Error", error)
+            alert('error', 'Error', error)
           })
       } else if (isShowFormUpdate.value) {
         console.log('2') // not selected
@@ -293,13 +326,13 @@ const onSubmit = () => {
         onUpdate(req, req?.id, API_UPDATE_ROLE)
           .then((response) => {
             console.log('Update Sumitted .....', response)
-            alert("success", "Success", "Role has been updated succesfully.")
-            showListing();
-            onInitList();
+            alert('success', 'Success', 'Role has been updated succesfully.')
+            showListing()
+            onInitList()
           })
           .catch((error) => {
             stopLoading()
-            alert("error", "Error", error)
+            alert('error', 'Error', error)
           })
       }
     })

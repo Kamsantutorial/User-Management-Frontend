@@ -23,6 +23,7 @@ export const API_CREATE_USER = "setting/user/create"
 export const API_UPDATE_USER = "setting/user/update"
 export const API_LIST_USER = "setting/user/find-with-page"
 export const API_DELETE_USER = "setting/user/delete"
+export const API_COUNT_USER = "setting/user/count"
 
 //Permission
 export const API_CREATE_PERMISSION = "setting/permission/create"
